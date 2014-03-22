@@ -1,9 +1,8 @@
 '''-------------------------------ESERCIZIO1--------------------------------------------'''
-'''NOTE: tipo di struttura selta per l homework e' risultata abbastanza complessa in 
-quanto sono necessarie rotazioni su misura per cui il primo e di conseguenza anche 
-gli  altri esercizi sono stati realizzati con il grande sfrozo di far combaciare le
-metriche'''
-'''HOMEWORK:ESERCIZIO1'''
+'''NOTE: tipo di struttura selta per l homework e' risultata abbastanza complessa per 
+svolgere il secondo esercizio per cui sono stati realizzati in 2.5D i 4 modelli principali: nord, sud
+est e west che non si e' riusciti a costruire un pianta unica in 3D . Inoltre il progetto scelto e'
+ stato estremamente semplificato ripetto all'originale per la complessita' '''
 from pyplasm import *
 
 '''----colori------'''
@@ -94,10 +93,9 @@ salespazio = STRUCT([spaziosale,spaziosale1b])
 
 '''--------collegamenti tra colonne interne ed esterne----------'''
 piano0 = STRUCT([cortilecentrale2D,salespazio,colonneesterne1,colonneesterne])
-piano1 = piano0
 #VIEW(STRUCT([piano0]))
 
 '''two_and_half_model'''
 scala=COLOR(color2)(ROTATE([1,2])(7.5)(scale))
-two_and_half_model = STRUCT([piano0,pavimento,T(3)(8)(piano1),T([1,2])([3.5,7])(scala)])
+two_and_half_model = STRUCT([piano0,pavimento,T([1,2])([3.5,7])(scala)])
 VIEW(two_and_half_model)

@@ -1,25 +1,19 @@
+'''-------------------------------ESERCIZIO4--------------------------------------------'''
+'''NOTE: tipo di struttura selta per l homework e' risultata abbastanza complessa per 
+svolgere il secondo esercizio per cui sono stati realizzati in 2.5D i 4 modelli principali: nord, sud
+est e west che non si e' riusciti a costruire un pianta unica in 3D . Inoltre il progetto scelto e' 
+stato estremamente semplificato ripetto all'originale per la complessita' '''
 
-'''---------------------------------------------------------------------------'''
-'''NOTE: tipo di struttura selta per l homework e' risultata abbastanza complessa in 
-quanto sono necessarie rotazioni su misura per cui il primo e di conseguenza anche 
-gli  altri esercizi sono stati realizzati con il grande sfrozo di far combaciare le
-metriche senza alcun risultato'''
-'''-------------------------HOMEWORK:ESERCIZIO3-------------------------------'''
+'''----------------------------------------------------------------------------------'''
+
 from pyplasm import *
 '''----colori------'''
 colorscale2 = Color4f([0.3, 0.6, 0.5])
 
-colornord = Color4f([0.6, 0.5, 0.2])
-colorsud = Color4f([0.1, 0.2, 0.4])
-colorest= Color4f([0.7, 0.7, 0.7])
-colorwest= Color4f([0.7, 0.7, 0.7])
-colore1 = Color4f([0.2, 0.2, 0.5])
-colore2 = Color4f([0.8, 0.7, 0.9])
-colore3 = Color4f([0.9, 0.7, 0.2])
-colore4 = Color4f([0.6, 0.5, 0.2])
+
 colorporta = Color4f([0.1, 0.9, 0.9])
 colortriangolo =  Color4f([0.9, 0.3, 0.7])
-colorepavimento =  Color4f([0.5, 1, 0.5])
+colorepavimento =  Color4f([0.3, 1, 0.3])
 colorecortile = Color4f([1, 0.8, 0.7])
 coloreColonne =  Color4f([1, 0.8, 0.7])
 
@@ -31,10 +25,10 @@ coloreColonne =  Color4f([1, 0.8, 0.7])
 # p=INSR(PROD)([pavimento0,pavimento0a,Q(0.6)])
 # pavimento = COLOR(colorepavimento)(T([1,2])([-20,-20])(p))
 pavimento0 = CYLINDER ([20,0.1])(50)
-pavimento = COLOR(colorepavimento)(T([1,2])([-2,-1])(pavimento0))
+pavimento = COLOR(coloreColonne)(T([1,2])([-.5,-1])(pavimento0))
 cortilecentralepieno1=CYLINDER ([3.5,8])(8)
 cortilecentralepieno2=CYLINDER ([3,8])(8)
-cortilecentrale2D = COLOR(GREEN)(STRUCT([cortilecentralepieno1,cortilecentralepieno2]))
+cortilecentrale2D = STRUCT([cortilecentralepieno1,cortilecentralepieno2])
 '''colonne esterne'''
 colonna1=CYLINDER ([2.5,9])(8)
 colonna1b=CYLINDER ([2,9])(8)
@@ -151,9 +145,9 @@ prospettiva1a = SKELETON(1)(JOIN(AA(MK)(prospettiva1)))
 prospettiva2 = [[0,0],[0,6],[0,6],[-.5,7],[-1,7],[-2,6],[-2,0],[0,0]]
 prospettiva2a = SKELETON(1)(JOIN(AA(MK)(prospettiva2)))
 prospettiva2a=T(1)(11)(prospettiva2a)
-nord = COLOR(colornord)(STRUCT([fronte1,fronte2,fronte3,fronte4,
+nord = STRUCT([fronte1,fronte2,fronte3,fronte4,
 fronte5,fronte6,fronte7,fronte8, prospettiva1a,T(1)(4)(door),
-prospettiva2a]))
+prospettiva2a])
 '''------------------------------sud---------------------------------'''
 
 
@@ -176,8 +170,8 @@ fronte7S = SKELETON(1)(JOIN(AA(MK)(vistaFronte7S)))
 vistaFronte8S = [[2,0],[2,8]]
 fronte8S = SKELETON(1)(JOIN(AA(MK)(vistaFronte8S)))
 
-sud = COLOR(colorsud)(STRUCT([fronte1S,fronte2S,fronte3S,
-fronte5S,fronte6S,fronte7S,fronte8S]))
+sud = STRUCT([fronte1S,fronte2S,fronte3S,
+fronte5S,fronte6S,fronte7S,fronte8S])
 #VIEW(sud)
 
 '''------------------------------est---------------------------------'''
@@ -202,8 +196,8 @@ fronte7E = SKELETON(1)(JOIN(AA(MK)(vistaFronte7E)))
 vistaFronte8E = [[2,0],[2,8]]
 fronte8E = SKELETON(1)(JOIN(AA(MK)(vistaFronte8E)))
 
-est = COLOR(colorest)(STRUCT([fronte1E,fronte2E,fronte3E,
-fronte5E,fronte6E,fronte7E,fronte8E]))
+est = STRUCT([fronte1E,fronte2E,fronte3E,
+fronte5E,fronte6E,fronte7E,fronte8E])
 #VIEW(est)
 '''------------------------------west---------------------------------'''
 
@@ -227,8 +221,8 @@ fronte7W = SKELETON(1)(JOIN(AA(MK)(vistaFronte7W)))
 vistaFronte8W = [[2,0],[2,8]]
 fronte8W = SKELETON(1)(JOIN(AA(MK)(vistaFronte8W)))
 
-west = COLOR(colorwest)(STRUCT([fronte1W,fronte2W,fronte3W,
-fronte5W,fronte6W,fronte7W,fronte8W]))
+west = STRUCT([fronte1W,fronte2W,fronte3W,
+fronte5W,fronte6W,fronte7W,fronte8W])
 #VIEW(west)
 
 '''two_and_half_model'''
@@ -268,7 +262,7 @@ sca1 = PROD([sca,Q(1)]);
 sca2 = STRUCT(NN(14)([sca1,T([1,2])([a,b])]));
 sca3 = MAP([S3,S1,S2])(sca2);
 sca4 = T([1,2,3])([0.5,2.3,-0.2])(sca3);
-scala=COLOR(colorscale2)(ROTATE([1,2])(3)(sca4))
+scala=COLOR(coloreColonne)(ROTATE([1,2])(3)(sca4))
 solid_model_3D = STRUCT([piano0,pavimento,T([1,2])([5,15])(scala)])
 VIEW(solid_model_3D)
 

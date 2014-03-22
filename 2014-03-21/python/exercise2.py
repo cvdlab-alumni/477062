@@ -1,8 +1,8 @@
-'''-------------------------------ESERCIZIO1--------------------------------------------'''
-'''NOTE: tipo di struttura selta per l homework e' risultata abbastanza complessa in 
-quanto sono necessarie rotazioni su misura per cui il primo e di conseguenza anche 
-gli  altri esercizi sono stati realizzati con il grande sfrozo di far combaciare le
-metriche senza alcun risultato'''
+'''-------------------------------ESERCIZIO2--------------------------------------------'''
+'''NOTE: tipo di struttura selta per l homework e' risultata abbastanza complessa per 
+svolgere il secondo esercizio per cui sono stati realizzati in 2.5D i 4 modelli principali: nord, sud
+est e west che non si e' riusciti a costruire un pianta unica in 3D . Inoltre il progetto scelto e' 
+stato estremamente semplificato ripetto all'originale per la complessita' '''
 '''----------------------------------------------------------------------------------'''
 from pyplasm import *
 '''----colori------'''
@@ -256,4 +256,4 @@ sca4 = T([1,2,3])([0.5,2.3,-0.2])(sca3);
 scala=ROTATE([1,2])(3)(sca4)
 mock_up_3D = STRUCT([piano0,pavimento,T([1,2])([5,15])(scala),copri,nord,sud,est,west])
 mock_up_3D=SKELETON(1)(mock_up_3D)
-VIEW(COLOR(BLUE)(mock_up_3D))
+VIEW(COLOR(colorepavimento)(mock_up_3D))

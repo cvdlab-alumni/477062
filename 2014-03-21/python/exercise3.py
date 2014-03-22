@@ -1,9 +1,10 @@
-'''---------------------------------------------------------------------------'''
-'''NOTE: tipo di struttura selta per l homework e' risultata abbastanza complessa in 
-quanto sono necessarie rotazioni su misura per cui il primo e di conseguenza anche 
-gli  altri esercizi sono stati realizzati con il grande sfrozo di far combaciare le
-metriche senza alcun risultato'''
-'''-------------------------HOMEWORK:ESERCIZIO3-------------------------------'''
+'''-------------------------------ESERCIZIO3--------------------------------------------'''
+'''NOTE: tipo di struttura selta per l homework e' risultata abbastanza complessa per 
+svolgere il secondo esercizio per cui sono stati realizzati in 2.5D i 4 modelli principali: nord, sud
+est e west che non si e' riusciti a costruire un pianta unica in 3D . Inoltre il progetto scelto e' 
+stato estremamente semplificato ripetto all'originale per la complessita' '''
+'''----------------------------------------------------------------------------------'''
+
 from pyplasm import *
 '''----colori------'''
 colornord = Color4f([0.6, 0.5, 0.2])
@@ -28,7 +29,7 @@ coloreColonne =  Color4f([1, 0.8, 0.7])
 # p=INSR(PROD)([pavimento0,pavimento0a,Q(0.6)])
 # pavimento = COLOR(colorepavimento)(T([1,2])([-20,-20])(p))
 pavimento0 = CYLINDER ([20,0.1])(50)
-pavimento = COLOR(colorepavimento)(T([1,2])([-.5,-1])(pavimento0))
+pavimento = COLOR(colorecortile)(T([1,2])([-.5,-1])(pavimento0))
 cortilecentralepieno1=CYLINDER ([3.5,8])(8)
 cortilecentralepieno2=CYLINDER ([3,8])(8)
 cortilecentrale2D = COLOR(GREEN)(STRUCT([cortilecentralepieno1,cortilecentralepieno2]))
