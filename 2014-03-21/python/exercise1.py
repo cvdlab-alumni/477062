@@ -2,14 +2,26 @@
 '''NOTE: tipo di struttura selta per l homework e' risultata abbastanza complessa in 
 quanto sono necessarie rotazioni su misura per cui il primo e di conseguenza anche 
 gli  altri esercizi sono stati realizzati con il grande sfrozo di far combaciare le
-metriche senza alcun risultato'''
+metriche'''
 '''HOMEWORK:ESERCIZIO1'''
 from pyplasm import *
 
 '''----colori------'''
-colornord = Color4f([0.6, 0.5, 0.2])
+color1 = Color4f([0.6, 0.3, 0.2])
+color2 = Color4f([0.3, 0.6, 0.5])
 
+
+'''-------scale-------'''
+dom2D = PROD([INTERVALS(2*PI)(20), INTERVALS(1)(1)])
+scale=SKELETON(1)(dom2D)
 '''--------------'''
+pavimento0 = CYLINDER ([20,0.1])(50)
+pavimento1 = CYLINDER ([21,0.1])(50)
+pavimento2 = STRUCT([pavimento0,pavimento1])
+pavimento = T([1,2])([-.5,-1])(pavimento2)
+pavimento = COLOR(color1)(SKELETON(1)(pavimento))
+
+
 cortilecentralepieno1=SKELETON(1)(CYLINDER ([3.5,0])(8))
 cortilecentralepieno2=SKELETON(1)(CYLINDER ([3,0])(8))
 cortilecentrale2D = COLOR(GREEN)(STRUCT([cortilecentralepieno1,cortilecentralepieno2]))
@@ -72,7 +84,6 @@ colonneesterne6 = STRUCT([T([1,2])([-6.2,-6.5])(esagono6)])
 colonneesterne7 = STRUCT([T([1,2])([0.1,-9])(esagono7)])
 colonneesterne8 = STRUCT([T([1,2])([6.5,-6.2])(esagono8)])
 
-
 colonneesterne = COLOR(RED)(STRUCT([colonneesterne1,colonneesterne2,
 	colonneesterne3,colonneesterne4,colonneesterne5,
 	colonneesterne6,colonneesterne7,colonneesterne8]))
@@ -87,5 +98,6 @@ piano1 = piano0
 #VIEW(STRUCT([piano0]))
 
 '''two_and_half_model'''
-two_and_half_model = STRUCT([piano0,T(3)(8)(piano1)])
+scala=COLOR(color2)(ROTATE([1,2])(7.5)(scale))
+two_and_half_model = STRUCT([piano0,pavimento,T(3)(8)(piano1),T([1,2])([3.5,7])(scala)])
 VIEW(two_and_half_model)

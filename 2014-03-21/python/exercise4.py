@@ -1,3 +1,4 @@
+
 '''---------------------------------------------------------------------------'''
 '''NOTE: tipo di struttura selta per l homework e' risultata abbastanza complessa in 
 quanto sono necessarie rotazioni su misura per cui il primo e di conseguenza anche 
@@ -6,6 +7,8 @@ metriche senza alcun risultato'''
 '''-------------------------HOMEWORK:ESERCIZIO3-------------------------------'''
 from pyplasm import *
 '''----colori------'''
+colorscale2 = Color4f([0.3, 0.6, 0.5])
+
 colornord = Color4f([0.6, 0.5, 0.2])
 colorsud = Color4f([0.1, 0.2, 0.4])
 colorest= Color4f([0.7, 0.7, 0.7])
@@ -28,7 +31,7 @@ coloreColonne =  Color4f([1, 0.8, 0.7])
 # p=INSR(PROD)([pavimento0,pavimento0a,Q(0.6)])
 # pavimento = COLOR(colorepavimento)(T([1,2])([-20,-20])(p))
 pavimento0 = CYLINDER ([20,0.1])(50)
-pavimento = COLOR(colorepavimento)(T([1,2])([-.5,-1])(pavimento0))
+pavimento = COLOR(colorepavimento)(T([1,2])([-2,-1])(pavimento0))
 cortilecentralepieno1=CYLINDER ([3.5,8])(8)
 cortilecentralepieno2=CYLINDER ([3,8])(8)
 cortilecentrale2D = COLOR(GREEN)(STRUCT([cortilecentralepieno1,cortilecentralepieno2]))
@@ -255,8 +258,20 @@ copriStruttura2 = T([1,2])([-10,-10])(MAP([S1,S3,S2])(latiEsagono2))
 latiEsagono3 = T(1)(1.5)(PROD([west1, Q(1)]))
 copriStruttura3 = T([1,2])([-20,-10])(MAP([S1,S3,S2])(latiEsagono3))
 
-mock_up_3D = STRUCT([piano0,pavimento])
-VIEW(mock_up_3D)
+'''------definisco scale--------'''
+a = 0.5 
+b = 3.2/15
+p = [[0,0],[a,0.2],[a,0.1+b],[0,0.1+a]];
+c = [[1,2,3,4]];
+sca = MKPOL([p,c,None]);
+sca1 = PROD([sca,Q(1)]);
+sca2 = STRUCT(NN(14)([sca1,T([1,2])([a,b])]));
+sca3 = MAP([S3,S1,S2])(sca2);
+sca4 = T([1,2,3])([0.5,2.3,-0.2])(sca3);
+scala=COLOR(colorscale2)(ROTATE([1,2])(3)(sca4))
+solid_model_3D = STRUCT([piano0,pavimento,T([1,2])([5,15])(scala)])
+VIEW(solid_model_3D)
+
 
 
 
