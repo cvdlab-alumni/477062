@@ -158,4 +158,4 @@ luceStradaPrincipale = T([1,2])([0,-20])(STRUCT([luceStrada,luceStrada1]))
 stradePrincipali = T([1,2])([0,20])(STRUCT([luceStradaPrincipale,spartiStrada,stradaCastelloCase1,stradaCastelloCase2]))
 #############################################################
 collegamenti = STRUCT([stradePrincipali,compl_Vista,basei1])
-VIEW(collegamenti)
+#VIEW(collegamenti)
