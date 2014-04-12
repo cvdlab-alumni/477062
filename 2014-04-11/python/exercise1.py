@@ -38,7 +38,7 @@ base3 = T([1,2])([-.5,-1])(pavimentod)
 stradaEsterna1 = COLOR(colorePratointorno)(DIFFERENCE([base2,base3]))
 ############################sabbia###########################################
 ############################sabbia###########################################
-baseNera = T([1,2])([-.4,-.2])(COLOR(RED)(CYLINDER ([5.8,.1])(30)))
+baseNera = T([1,2])([-.4,-.2])(COLOR(colorEdificio)(CYLINDER ([5.8,.1])(30)))
 ############################sabbia###########################################
 ############################sabbia###########################################
 
@@ -163,6 +163,7 @@ cortilepiano1=COLOR(colorecortile)(DIFFERENCE([salespazio, cortilecentrale2D]))
 '''--------collegamenti tra colonne interne ed esterne----------'''
 #######################################################################
 piano0 = COLOR(colorEdificio)(STRUCT([cortilecentrale2D,colonneesterne,colonneesterne]))
+orizontale = COLOR(colorEdificio)(STRUCT([cortilecentrale2D]))
 piano1 = COLOR(colorEdificio)(STRUCT([cortilecentrale2D,colonneesterne1,colonneesterne]))
 #######################################################################
 #######################################################################
@@ -183,4 +184,6 @@ scala=COLOR(colorEdificio)(ROTATE([1,2])(3)(sca4))
 solid_model_3D = STRUCT([piano0,T(3)(9)(piano1),intornoCastello,
 	T([1,2])([5,15])(scala)])
 #VIEW(solid_model_3D)
+#VIEW(orizontale)
+
 
