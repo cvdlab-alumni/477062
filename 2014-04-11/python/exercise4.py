@@ -1,6 +1,6 @@
 from pyplasm import *
 from exercise3 import *
-'''-------------------------------HOMEWORK2-ESERCIZIO3--------------------------------------------'''
+'''-------------------------------HOMEWORK2-ESERCIZIO4--------------------------------------------'''
 '''NOTE: non sono disegnate tutte le finestre del progetto originale in quanto
 i tempi di elaborazione sono notevoli '''
 '''----------------------------------------------------------------------------------'''
