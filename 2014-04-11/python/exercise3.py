@@ -17,6 +17,8 @@ coloralbero = rgb([77, 255, 0])
 colortronco = rgb([199, 197, 136])
 colorMuraConfine = rgb([109, 128, 198])
 colorSpartiStrada = rgb([232, 232, 232])
+colortronco = rgb([199, 197, 136])
+colorbase = rgb([112, 217, 246])
 
 #############################################################
 '''------------------definizioni funioni------------------ '''
@@ -51,6 +53,10 @@ lampioni1 =T([1,2])([7,-1])(h1)
 lampioni2 =T([1,2])([7,-10])(h1)
 lampioni3 =T([1,2])([7,-8])(h1)
 lampioni = STRUCT([lampioni1,lampioni2,lampioni3])
+#############################################################
+'''base'''
+#############################################################
+basei1 = COLOR(colorbase)(T([1,2,3])([-85,-180,-5])((CUBOID([370,360,.01]))))
 
 #############################################################
 '''palazzo'''
@@ -139,17 +145,17 @@ compl_Vista = STRUCT([modelloCompleto1,porte,vicinato,intornoCastello])
 '''strade per castello '''
 #############################################################
 stradaCastelloCase1 = COLOR(colorStradePrincipali)(T([1,2])([111.5,-25])((CUBOID([4,70,0.05]))))
-stradaCastelloCase2 = COLOR(colorStradePrincipali)(T([1,2])([11,-25])((CUBOID([400,5,0.05]))))
-spartiStrada = COLOR(GREEN)(T([1,2,3])([11,-23,.1])((CUBOID([400,1,1]))))
+stradaCastelloCase2 = COLOR(colorStradePrincipali)(T([1,2])([11,-25])((CUBOID([380,5,0.05]))))
+spartiStrada = COLOR(GREEN)(T([1,2,3])([30,-23,.1])((CUBOID([400,1,1]))))
 #############################################################
 '''lampioni stradali '''
 #############################################################
-luce = [T(1)(10), h1]
-luceStrada = STRUCT(NN(40)(luce))
-luceStrada1 = T([1,2])([0,-5])(STRUCT(NN(40)(luce)))
+luce = [T(1)(15), h1]
+luceStrada = STRUCT(NN(25)(luce))
+luceStrada1 = T([1,2])([0,-5])(STRUCT(NN(25)(luce)))
 luceStradaPrincipale = T([1,2])([0,-20])(STRUCT([luceStrada,luceStrada1]))
 #############################################################
 stradePrincipali = T([1,2])([0,20])(STRUCT([luceStradaPrincipale,spartiStrada,stradaCastelloCase1,stradaCastelloCase2]))
 #############################################################
-collegamenti = STRUCT([stradePrincipali,compl_Vista])
-#VIEW(collegamenti)
+collegamenti = STRUCT([stradePrincipali,compl_Vista,basei1])
+VIEW(collegamenti)
