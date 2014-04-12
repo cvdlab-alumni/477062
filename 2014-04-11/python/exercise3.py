@@ -146,7 +146,7 @@ compl_Vista = STRUCT([modelloCompleto1,porte,vicinato,intornoCastello])
 #############################################################
 stradaCastelloCase1 = COLOR(colorStradePrincipali)(T([1,2])([111.5,-25])((CUBOID([4,70,0.05]))))
 stradaCastelloCase2 = COLOR(colorStradePrincipali)(T([1,2])([11,-25])((CUBOID([380,5,0.05]))))
-spartiStrada = COLOR(GREEN)(T([1,2,3])([30,-23,.1])((CUBOID([400,1,1]))))
+spartiStrada = COLOR(GREEN)(T([1,2,3])([30,-23,.1])((CUBOID([380,1,1]))))
 #############################################################
 '''lampioni stradali '''
 #############################################################
