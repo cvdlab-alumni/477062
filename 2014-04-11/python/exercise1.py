@@ -180,7 +180,7 @@ sca3 = MAP([S3,S1,S2])(sca2);
 sca4 = T([1,2,3])([0.5,2.2,-0.2])(sca3);
 scala=COLOR(colorEdificio)(ROTATE([1,2])(3)(sca4))
 
-solid_model_3D = SKELETON(1)(STRUCT([piano0,T(3)(9)(piano1),intornoCastello,
-	T([1,2])([5,15])(scala)]))
+solid_model_3D = STRUCT([piano0,T(3)(9)(piano1),intornoCastello,
+	T([1,2])([5,15])(scala)])
 #VIEW(solid_model_3D)
 
