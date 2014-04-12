@@ -158,5 +158,5 @@ sca4 = T([1,2,3])([0.5,2.2,-0.2])(sca3);
 scala=COLOR(colorEdificio)(ROTATE([1,2])(3)(sca4))
 modelloCompleto = STRUCT([piano02,T(3)(8)(piano12)])
 modelloCompleto1 = STRUCT([piano0,T(3)(8)(piano1),T([1,2])([5,15])(scala)])
-#VIEW(modelloCompleto)
+#VIEW(modelloCompleto1)
 
