@@ -6,7 +6,7 @@ i tempi di elaborazione sono notevoli '''
 '''----------------------------------------------------------------------------------'''
 
 #############################################################
-'''-------------alberi------------------ '''
+'''-------------alberi--------------- '''
 #############################################################
 domain2D = PROD([INTERVALS(2*PI)(32), INTERVALS(1)(3)])
 v = MAP(disk2D)(domain2D)
@@ -18,7 +18,7 @@ albero = T([1,2,3])([7,-5,5])(albero)
 alberi = [T(1)(4), albero]
 alberi = STRUCT(NN(3)(alberi))
 alberiA = [T(2)(4), alberi]
-'''-------------foresta alberi------------------ '''
+'''-------------foresta alberi------------ '''
 foresta = T([1,2])([112,50])(STRUCT(NN(20)(alberiA)))
 foresta1 = T([1,2])([100,-150])(STRUCT(NN(20)(alberiA)))
 foresta3 = T([1,2])([-50,-150])(STRUCT(NN(20)(alberiA)))
