@@ -24,5 +24,5 @@ foresta1 = T([1,2])([100,-150])(STRUCT(NN(20)(alberiA)))
 foresta3 = T([1,2])([-50,-150])(STRUCT(NN(20)(alberiA)))
 
 castelloCompleto = STRUCT([foresta,foresta3,foresta1,collegamenti])
-#############################################################
+#######################################################
 VIEW(castelloCompleto)
