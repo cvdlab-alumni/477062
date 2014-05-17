@@ -23,6 +23,12 @@ colorePalazzo = rgb([179,119,85])
 colorePavimento = rgb([98,51,24])
 colorePalazzoVicino1 = rgb([223,222,189])
 colorePalazzoVicino2 = rgb([190,167,196])
+colorePalazzoVicino3 = rgb([140,140,140])
+colorePalazzoVicino4 = rgb([152,242,224])
+colorePalazzoVicino5 = rgb([200,240,150])
+colorePalazzoVicino6 = rgb([236,150,142])
+coloreTerra = rgb([140,140,140])
+
 '''***********************************************************'''
 
 
@@ -1114,16 +1120,19 @@ vistaDaDietro = STRUCT([dietro0,dietro1,dietro2,dietro3,dietro4,dietro5,
 vistaDaDietro = T([1,2,3])([6.5,-6.5,-1.62])(vistaDaDietro)
 ################################################################################
 macchina = STRUCT([vistaAltoLateraleFrontale,vistaDaDietro])
-macchina = T([1,2,3])([2,-5,0])(macchina)
+macchina = T([1,2,3])([2,-7,.1])(macchina)
+macchina1 = T([1,2,3])([10,0,0])(macchina)
+macchina2 = T([1,2,3])([-10,0,0])(macchina)
+
 
 '''***************************************fine macchina************************************'''
 appartamento = COLOR(colorePalazzo)(STRUCT(MKPOLS(master)))
-vistaCompleta = STRUCT([macchina,appartamento])
+vistaCompleta = STRUCT([macchina,macchina1,macchina2,appartamento])
 #VIEW(vistaCompleta)
 '''***************************************fine macchinaEPalazzo************************************'''
 '''***************************************faccio la strada************************************'''
-strada = CUBOID([50,5,.1])
-strada = T([1,2,3])([-20,-5,-1])(strada)
+strada = CUBOID([50,8,30])
+strada = T([1,2,3])([-20,-8,-30])(strada)
 strada = COLOR(coloreStrada)(strada)
 stradaPalazzoMacchina = STRUCT([vistaCompleta,strada])
 #VIEW(stradaPalazzoMacchina)
@@ -1156,14 +1165,69 @@ base1 = SOLIDIFY(base1)
 vicino2 = PROD([base1, Q(20)])
 vicino2 = T([1,2,3])([-10,0,0])(vicino2)
 vicino2 = COLOR(colorePalazzoVicino2)(vicino2)
+##############vicino3#############
+base2 = STRUCT([cl0,cl1,cl2,cl3,cl4])
+base2 = SOLIDIFY(base2)
+vicino3 = PROD([base2, Q(50)])
+vicino3 = T([1,2,3])([5,15,-30])(vicino3)
+vicino3 = COLOR(colorePalazzoVicino3)(vicino3)
 '''***************************************fine pavimento************************************'''
 '''*************************metto insieme tutto il progetto***************************'''
-progetto = STRUCT([stradaPalazzoMacchina,vicino1,vicino2])
+progetto = STRUCT([stradaPalazzoMacchina,vicino1,vicino2,vicino3])
 '''************************base palazzo***************************'''
-pavimento = CUBOID([50,10,.1])
-pavimento = T([1,2,3])([-20,-1,0])(pavimento)
-pavimento = COLOR(RED)(pavimento)
-'''************************fine palazzo***************************'''
+pavimento = CUBOID([50,10,30])
+pavimento = T([1,2,3])([-20,-1,-30])(pavimento)
+pavimento = COLOR(coloreTerra)(pavimento)
 
-progetto = STRUCT([progetto,pavimento])
+pavimento2 = CUBOID([50,10,30])
+pavimento2 = T([1,2,3])([-20,-18,-30])(pavimento2)
+pavimento2 = COLOR(coloreTerra)(pavimento2)
+'''************************fine palazzo***************************'''
+progetto = STRUCT([progetto,pavimento,pavimento2])
+'''************************************************'''
+pavimentoprincipale = CUBOID([100,100,1])
+pavimentoprincipale = T([1,2,3])([-40,-50,-30])(pavimentoprincipale)
+pavimentoprincipale = COLOR(coloreTerra)(pavimentoprincipale)
+'''************************************************'''
+'''*************************modello palazzo davanti***********************'''
+
+base3 = STRUCT([cl0,cl1,cl2,cl3,cl4])
+base3 = SOLIDIFY(base3)
+vicino4 = PROD([base3, Q(20)])
+vicino4 = T([1,2,3])([-20,-15,.1])(vicino4)
+vicino4 = COLOR(colorePalazzoVicino6)(vicino4)
+
+
+base4 = STRUCT([cl0,cl1,cl2,cl3,cl4])
+base4 = SOLIDIFY(base4)
+vicino5 = PROD([base4, Q(10)])
+vicino5 = T([1,2,3])([-10,-15,.1])(vicino5)
+vicino5 = COLOR(colorePalazzoVicino5)(vicino5)
+
+base5 = STRUCT([cl0,cl1,cl2,cl3,cl4])
+base5 = SOLIDIFY(base5)
+vicino6 = PROD([base5, Q(15)])
+vicino6 = T([1,2,3])([-5,-15,.1])(vicino6)
+vicino6 = COLOR(colorePalazzoVicino4)(vicino6)
+
+base6 = STRUCT([cl0,cl1,cl2,cl3,cl4])
+base6 = SOLIDIFY(base6)
+vicino7 = PROD([base6, Q(5)])
+vicino7 = T([1,2,3])([5,-15,.1])(vicino7)
+vicino7 = COLOR(colorePalazzoVicino5)(vicino7)
+
+base7 = STRUCT([cl0,cl1,cl2,cl3,cl4])
+base7 = SOLIDIFY(base7)
+vicino8 = PROD([base7, Q(10)])
+vicino8 = T([1,2,3])([13,-15,.1])(vicino8)
+vicino8 = COLOR(colorePalazzoVicino4)(vicino8)
+
+base8 = STRUCT([cl0,cl1,cl2,cl3,cl4])
+base8 = SOLIDIFY(base8)
+vicino9 = PROD([base8, Q(20)])
+vicino9 = T([1,2,3])([20,-15,.1])(vicino9)
+vicino9 = COLOR(colorePalazzoVicino6)(vicino9)
+'''************************************************'''
+'''************************************************'''
+progetto = STRUCT([pavimentoprincipale,progetto,vicino4,vicino5,vicino6,vicino7,vicino8,vicino9])
 VIEW(progetto)

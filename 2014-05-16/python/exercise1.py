@@ -132,5 +132,5 @@ hpc = cellNumbering (master,hpc)(range(len(master[1])),CYAN,2)
 #rimuovo la parete per fare la porta della cucina
 toRemove = [70]
 master = master[0], [cell for k,cell in enumerate(master[1]) if not (k in toRemove)]
-#DRAW(master)
+DRAW(master)
 '''--------------------------apppartemento fine-------------------------------'''
