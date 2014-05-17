@@ -31,7 +31,7 @@ master = diagram2cell(diagram,master,toMerge)
 hpc = SKEL_1(STRUCT(MKPOLS(master)))
 hpc = cellNumbering (master,hpc)(range(len(master[1])),CYAN,2)
 #VIEW(hpc)
-#elimio la aprete tra cucine e baglio ed elimino i volumi del bagno e cucina
+#elimio la parete tra cucine e baglio ed elimino i volumi del bagno e cucina
 toRemove = [25,46,48]
 master = master[0], [cell for k,cell in enumerate(master[1]) if not (k in toRemove)]
 #DRAW(master)
@@ -132,5 +132,5 @@ hpc = cellNumbering (master,hpc)(range(len(master[1])),CYAN,2)
 #rimuovo la parete per fare la porta della cucina
 toRemove = [70]
 master = master[0], [cell for k,cell in enumerate(master[1]) if not (k in toRemove)]
-DRAW(master)
+#DRAW(master)
 '''--------------------------apppartemento fine-------------------------------'''
