@@ -1,8 +1,12 @@
 from exercise1 import *
-'''-------------------definizioni-------------------'''
 Dom1D = INTERVALS(1)(24)
 Bezier = BEZIER(S1)
-'''-------------------creo palazzo-------------------'''
+'''----colori------'''
+def rgb(c):
+	return [c[0]/255.0, c[1]/255.0, c[2]/255.0]
+'''***********************************************************'''
+colorePalazzo = rgb([222,212,185])
+'''***********************************************************'''
 appartamento1 = master
 master = assemblyDiagramInit([8,3,9])([[2.5,6,0.2,3,.2,9,.5,4],[4,8,8],[.5,4,.2,4,.2,4,.2,4,3]])
 #elimio celle inutili
@@ -296,9 +300,8 @@ diagram = assemblyDiagramInit([1,3,2])([[1],[1,2,1],[2,1]])
 master = diagram2cell(diagram,master,3)
 toRemove = [8,19]
 master = eliminaCelle(toRemove,master)
-'''----------------------fineGaragePiccolo-----------------------'''
 garage2 = master
-'''-------------------------------------------------------------'''
+'''----------------------fineGaragePiccolo-----------------------'''
 '''----------------------GarageEst-----------------------'''
 #diagramma principale
 master = assemblyDiagramInit([3,3,2])([[.2,4,.2],[.2,4,.2],[0.2,4]])
@@ -308,12 +311,10 @@ diagram = assemblyDiagramInit([3,1,2])([[1,2,1],[1],[2,1]])
 master = diagram2cell(diagram,master,11)
 diagram = assemblyDiagramInit([3,1,3])([[1,1,1],[1],[1.5,2,1.5]])
 master = diagram2cell(diagram,master,7)
-
 toRemove = [8,18,26]
 master = eliminaCelle(toRemove,master)
-'''----------------------fineGarageEst-----------------------'''
 garage3 = master
-'''----------------------------------------------------------'''
+'''----------------------fineGarageEst-----------------------'''
 '''----------------------balconeWest-----------------------'''
 #diagramma principale
 master = assemblyDiagramInit([3,3,2])([[.2,2,.2],[.2,4,.2],[0.2,1.5]])
@@ -337,6 +338,7 @@ V,CV = master
 toRemove = [7,9]
 master = eliminaCelle(toRemove,master)
 balconeDavanti = master
+
 '''----------------------fineBalconeDavanti-----------------------'''
 #mappo balcone laterale west
 palazzo = diagram2cell(balconeWest,palazzo,85)
@@ -373,7 +375,7 @@ palazzo = diagram2cell(piano2,palazzo,58)
 palazzo = diagram2cell(garage2,palazzo,67)
 #mappo garage piccolo 1
 palazzo = diagram2cell(garage3,palazzo,71)
-VIEW(visulizzaModello(palazzo))
+#VIEW(visulizzaModello(palazzo))
 ###############################################
 '''----------------------BEZIER------------------------------'''
 #nuvola
@@ -414,5 +416,8 @@ nuovola = MATERIAL([1,1,1,0, 0,0,0,0.2, 0,0,0,0, 0,0,0,0, 50])(nuovola)
 #ciao = STRUCT([palazzo,nuovola])
 #VIEW(ciao)
 '''-------------------------------------------------------------'''
-#VIEW(visulizzaModello(palazzo))
+palazzo = COLOR(colorePalazzo)(STRUCT(MKPOLS(palazzo)))
+
+VIEW(palazzo)
 #VIEW(scheletroModello(palazzo))
+
