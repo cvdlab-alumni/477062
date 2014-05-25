@@ -1,6 +1,5 @@
 from exercise1 import *
 from random import randint
-'''***********************************************************'''
 appartamento1 = master
 master = assemblyDiagramInit([8,3,9])([[4,6,0.2,3,.2,9,.5,4],[4,8,8],[.5,4,.2,4,.2,4,.2,4,2]])
 #elimio celle inutili
@@ -240,7 +239,7 @@ V,CV = master
 #porta garage grande
 diagram = assemblyDiagramInit([3,1,2])([[1,3,1],[1],[3,1]])
 master = diagram2cell(diagram,master,7)
-toRemove = [8,19]
+toRemove = [8,19,14]
 master = eliminaCelle(toRemove,master)
 garage1 = master
 '''-------------------GaragePiccolo-----------------------'''
@@ -366,7 +365,6 @@ master = diagram2cell(diagram,master,52)
 toRemove = [53,55,57,59,61,63,65,67,69,71,73,75,77,79,81,82,84,86,88,90,92,94,96,98,100,102,104,106,108,110,6]
 master = eliminaCelle(toRemove,master)
 scaleIngresso = master
-'''-----------FineScaleIngresso----------------'''
 '''-----------ultimo piano divisioni-----------'''
 diagram = assemblyDiagramInit([1,3,1])([[1],[3,.1,4],[1]])
 palazzo = diagram2cell(diagram,palazzo,37)
@@ -430,43 +428,112 @@ diagram = assemblyDiagramInit([1,1,2])([[1],[1],[4,.2]])
 palazzo = diagram2cell(diagram,palazzo,11)
 diagram = assemblyDiagramInit([1,1,2])([[1],[1],[4,.2]])
 palazzo = diagram2cell(diagram,palazzo,57)
+'''----#tagli finestre condominio#dietro-----'''
+diagram = assemblyDiagramInit([1,2,1])([[1],[.2,1],[1]])
+palazzo = diagram2cell(diagram,palazzo,92)
+diagram = assemblyDiagramInit([1,2,1])([[1],[.2,5],[1]])
+palazzo = diagram2cell(diagram,palazzo,16)
+palazzo = diagram2cell(diagram,palazzo,27)
+palazzo = diagram2cell(diagram,palazzo,28)
+palazzo = diagram2cell(diagram,palazzo,29)
+#davanti
+diagram = assemblyDiagramInit([1,2,1])([[1],[5,.2],[1]])
+palazzo = diagram2cell(diagram,palazzo,158)
+diagram = assemblyDiagramInit([1,2,1])([[1],[5,.2],[1]])
+palazzo = diagram2cell(diagram,palazzo,88)
+#dietro finestre
+diagram = assemblyDiagramInit([3,1,3])([[1,2,1],[1],[1,2,1]])
+palazzo = diagram2cell(diagram,palazzo,154)
+palazzo = diagram2cell(diagram,palazzo,155)
+palazzo = diagram2cell(diagram,palazzo,148)
+#davanti
+palazzo = diagram2cell(diagram,palazzo,155)
+palazzo = diagram2cell(diagram,palazzo,156)
+diagram = assemblyDiagramInit([1,1,2])([[1],[1],[3,.1]])
+palazzo = diagram2cell(diagram,palazzo,148)
+palazzo = diagram2cell(diagram,palazzo,154)
+toRemove = [149,151,158,167,176,185,194,152,153,201,199]
+palazzo = eliminaCelle(toRemove,palazzo)
+diagram = assemblyDiagramInit([1,2,1])([[1],[3,.1],[1]])
+palazzo = diagram2cell(diagram,palazzo,36)
+palazzo = diagram2cell(diagram,palazzo,36)
+palazzo = diagram2cell(diagram,palazzo,36)
+palazzo = diagram2cell(diagram,palazzo,36)
+palazzo = diagram2cell(diagram,palazzo,36)
+palazzo = diagram2cell(diagram,palazzo,36)
+diagram = assemblyDiagramInit([1,2,1])([[1],[.15,3],[1]])
+palazzo = diagram2cell(diagram,palazzo,186)
+palazzo = diagram2cell(diagram,palazzo,187)
+palazzo = diagram2cell(diagram,palazzo,188)
+palazzo = diagram2cell(diagram,palazzo,189)
+palazzo = diagram2cell(diagram,palazzo,190)
+palazzo = diagram2cell(diagram,palazzo,191)
+palazzo = diagram2cell(diagram,palazzo,16)
+palazzo = diagram2cell(diagram,palazzo,16)
+palazzo = diagram2cell(diagram,palazzo,16)
+palazzo = diagram2cell(diagram,palazzo,16)
+palazzo = diagram2cell(diagram,palazzo,16)
+palazzo = diagram2cell(diagram,palazzo,16)
+diagram = assemblyDiagramInit([1,2,1])([[1],[3,.1],[1]])
+palazzo = diagram2cell(diagram,palazzo,199)
+palazzo = diagram2cell(diagram,palazzo,200)
+palazzo = diagram2cell(diagram,palazzo,201)
+palazzo = diagram2cell(diagram,palazzo,202)
+palazzo = diagram2cell(diagram,palazzo,203)
+palazzo = diagram2cell(diagram,palazzo,204)
+diagram = assemblyDiagramInit([1,1,2])([[1],[1],[3,.1]])
+palazzo = diagram2cell(diagram,palazzo,197)
+palazzo = diagram2cell(diagram,palazzo,213)
+toRemove = [189,193,214,205,209,216]
+palazzo = eliminaCelle(toRemove,palazzo)
+#creo spazio per le scale e la porta ultimo pinao
+diagram = assemblyDiagramInit([1,3,1])([[1],[2,1,.1],[1]])
+palazzo = diagram2cell(diagram,palazzo,21)
+palazzo = diagram2cell(diagram,palazzo,21)
+palazzo = diagram2cell(diagram,palazzo,21)
+diagram = assemblyDiagramInit([1,3,1])([[1],[1.5,1,.1],[1]])
+palazzo = diagram2cell(diagram,palazzo,176)
+diagram = assemblyDiagramInit([1,2,2])([[1],[3,.1],[3,.1]])
+palazzo = diagram2cell(diagram,palazzo,86)
+toRemove = [208,211,214,217,219,92]
+palazzo = eliminaCelle(toRemove,palazzo)
 '''--------FineStrutturaEsterna--------'''
 #mappo balcone laterale west
-palazzo = diagram2cell(balconeWest,palazzo,147)
-palazzo = diagram2cell(balconeWest,palazzo,147)
-palazzo = diagram2cell(balconeWest,palazzo,147)
+palazzo = diagram2cell(balconeWest,palazzo,124)
+palazzo = diagram2cell(balconeWest,palazzo,124)
+palazzo = diagram2cell(balconeWest,palazzo,124)
 #mappo balcone  dietro
-palazzo = diagram2cell(balconeDietro,palazzo,86)
-palazzo = diagram2cell(balconeDietro,palazzo,87)
-palazzo = diagram2cell(balconeDietro,palazzo,88)
-palazzo = diagram2cell(balconeDietro,palazzo,86)
-palazzo = diagram2cell(balconeDietro,palazzo,86)
-palazzo = diagram2cell(balconeDietro,palazzo,86)
+palazzo = diagram2cell(balconeDietro,palazzo,67)
+palazzo = diagram2cell(balconeDietro,palazzo,68)
+palazzo = diagram2cell(balconeDietro,palazzo,69)
+palazzo = diagram2cell(balconeDietro,palazzo,67)
+palazzo = diagram2cell(balconeDietro,palazzo,67)
+palazzo = diagram2cell(balconeDietro,palazzo,67)
 #mappo balcone  davanti
-palazzo = diagram2cell(balconeDavanti,palazzo,75)
-palazzo = diagram2cell(balconeDavanti,palazzo,76)
-palazzo = diagram2cell(balconeDavanti,palazzo,103)
-palazzo = diagram2cell(balconeDavanti,palazzo,75)
-palazzo = diagram2cell(balconeDavanti,palazzo,75)
-palazzo = diagram2cell(balconeDavanti,palazzo,75)
+palazzo = diagram2cell(balconeDavanti,palazzo,56)
+palazzo = diagram2cell(balconeDavanti,palazzo,57)
+palazzo = diagram2cell(balconeDavanti,palazzo,81)
+palazzo = diagram2cell(balconeDavanti,palazzo,56)
+palazzo = diagram2cell(balconeDavanti,palazzo,56)
+palazzo = diagram2cell(balconeDavanti,palazzo,56)
 #scale ingresso
-palazzo = diagram2cell(scaleIngresso,palazzo,94)
+palazzo = diagram2cell(scaleIngresso,palazzo,73)
 #mappo piano -1 sul palazzo
-palazzo = diagram2cell(appartamento1,palazzo,51)
+palazzo = diagram2cell(appartamento1,palazzo,32)
 #mappo garage grande
 palazzo = diagram2cell(garage1,palazzo,5)
 #mappo piano 1 sul palazzo sopra garage grande
 palazzo = diagram2cell(piano1,palazzo,6)
 palazzo = diagram2cell(piano1,palazzo,7)
-palazzo = diagram2cell(piano1,palazzo,130)
+palazzo = diagram2cell(piano1,palazzo,107)
 #mappo piano 2 sul palazzo
-palazzo = diagram2cell(piano2,palazzo,49)
-palazzo = diagram2cell(piano2,palazzo,50)
-palazzo = diagram2cell(piano2,palazzo,129)
+palazzo = diagram2cell(piano2,palazzo,30)
+palazzo = diagram2cell(piano2,palazzo,31)
+palazzo = diagram2cell(piano2,palazzo,106)
 #mappo garage piccolo -1
-palazzo = diagram2cell(garage2,palazzo,59)
+palazzo = diagram2cell(garage2,palazzo,40)
 #mappo garage piccolo 1
-palazzo = diagram2cell(garage3,palazzo,63)
+palazzo = diagram2cell(garage3,palazzo,44)
 '''----------------------BEZIER------------------------------'''
 nuvola1 = T([1,2,3])([ randint(1,50), randint(0,36), randint(30,33)])(generaNuvola())
 nuvola2 = T([1,2,3])([ randint(1,50), randint(0,36), randint(30,33)])(generaNuvola())
@@ -482,9 +549,8 @@ nuvola11 = T([1,2,3])([randint(1,50), randint(0,36), randint(30,33)])(generaNuvo
 nuvola12 = T([1,2,3])([randint(1,50), randint(0,36), randint(30,33)])(generaNuvola())
 nuvola13 = T([1,2,3])([randint(1,50), randint(0,36), randint(30,33)])(generaNuvola())
 nuvola14 = T([1,2,3])([randint(1,50), randint(0,36), randint(30,33)])(generaNuvola())
-nuvole = STRUCT([nuvola1,nuvola2,nuvola3,nuvola4,nuvola5,nuvola6,
-	nuvola7,nuvola8,nuvola9,nuvola10,nuvola11,nuvola12,nuvola13,
-	nuvola14])
+nuvole = STRUCT([nuvola1,nuvola2,nuvola3,nuvola4,nuvola5,nuvola6,nuvola7,nuvola8,nuvola9,
+	nuvola10,nuvola11,nuvola12,nuvola13,nuvola14])
 #rampa laterale
 puntitriangolo  = [[[0,4],[0,20],[6,20],[0,4]]]
 triangolo = STRUCT(AA(POLYLINE)(puntitriangolo))
@@ -551,8 +617,8 @@ macchinaCompleta4 = T(1)(-9)(macchinaCompleta2)
 macchinaCompleta5 = T(1)(-18)(macchinaCompleta2)
 macchinaCompleta6 = T(1)(8)(macchinaCompleta2)
 macchinaCompleta7 = T(1)(18)(macchinaCompleta2)
-insiemeMacchine = STRUCT([macchinaCompleta1,macchinaCompleta2,macchinaCompleta3,
-	macchinaCompleta4,macchinaCompleta5,macchinaCompleta6,macchinaCompleta7])
+insiemeMacchine = STRUCT([macchinaCompleta1,macchinaCompleta2,macchinaCompleta3,macchinaCompleta4,
+	macchinaCompleta5,macchinaCompleta6,macchinaCompleta7])
 '''------------Strada-----------------'''
 strada = CUBOID([50,6,6.5])
 strada = COLOR(coloreRampa)(T([1,2,3])([0,20,0])(strada))
@@ -568,7 +634,18 @@ albero3 = generaAlbero([24,30,6])([.5,7])
 albero4 = generaAlbero([34,30,6])([.5,7])
 albero5 = generaAlbero([44,30,6])([.5,7])
 alberi = STRUCT([albero1,albero2,albero3,albero4,albero5])
-'''----------------------------------'''
+'''----------scalaAChiocciola---------'''
+scale = T(2)(.1)(MAP(BEZIER(S3)([spiral1,spiral2]))(dom3D))
+baseSotto = T([1,2,3])([-1.5,-1,0])(COLOR(coloreScale)(CUBOID([3,2,.2])))
+baseAlto = CUBOID([3.4,2.5,.2])
+basePerTagliare = T([1,2])([.7,.2])(CUBOID([1.9,2.1,.2]))
+baseSopraPianoTerra = T([1,2,3])([-1.5,-1,4])(COLOR(coloreScale)(DIFFERENCE([baseAlto,basePerTagliare])))
+baseSopraPrimoPiano = T([1,2,3])([0,0,4.2])(baseSopraPianoTerra)
+baseSopraSecondoPiano = T([1,2,3])([0,0,4.2])(baseSopraPrimoPiano)
+baseSopraTerzoPiano = T([1,2,3])([0,0,4])(baseSopraSecondoPiano)
+palo = COLOR(colorePaloScale)(CYLINDER ([.09,18.5])(30))
+scalaAChiocciola = T([1,2,3])([11.5,10.1,.5])(STRUCT([palo,baseSotto,scale,baseSopraPianoTerra,baseSopraPrimoPiano,baseSopraSecondoPiano,baseSopraTerzoPiano]))
+'''-----------------------------------'''
 palazzo = COLOR(colorePalazzo)(STRUCT(MKPOLS(palazzo)))
-palazzo = STRUCT([palazzo,nuvole,rampa,rampaGarage,insiemeMacchine,strada,giardino,giardinoEst,alberi])
+palazzo = STRUCT([palazzo,nuvole,rampa,rampaGarage,insiemeMacchine,scalaAChiocciola,strada,giardino,giardinoEst,alberi])
 VIEW(palazzo)

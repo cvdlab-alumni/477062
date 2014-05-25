@@ -17,9 +17,10 @@ coloreRuoteMacchina = rgb([71,71,71])
 coloreMacchina = rgb([49,56,148])
 coloreGiardino = rgb([5,138,0])
 coloreBalcone = rgb([5,138,0])
+colorePaloScale = rgb([135, 131, 131])
+coloreScale = rgb([240, 208, 180])
 coloreTronco = rgb([102,51,0])
 '''***********************************************************'''
-
 Dom1D = INTERVALS(1)(10)
 Bezier = BEZIER(S1)
 '''***********************************************************'''
@@ -79,6 +80,14 @@ def generaNuvola():
 	nuovola = STRUCT([Nuv1,Nuv2,Nuv3,Nuv4,Nuv5,Nuv6,Nuv7,Nuv8,Nuv9])
 	nuovola = SOLIDIFY(nuovola)
 	return MATERIAL([1,1,1,0, 0,0,0,0.2, 0,0,0,0, 0,0,0,0, 50])(nuovola)
+def spiral1(p):
+	alpha,r,h = p
+	return [r*COS(alpha), r*SIN(alpha), alpha/(2*PI)]
+def spiral2(p):
+    alpha,r,h = p
+    return [r*COS(alpha), r*SIN(alpha), alpha/(2*PI) + 0.2]
+dom1D = INTERVALS(1)(1)
+dom3D = INSR(PROD)([INTERVALS(36*PI)(140), dom1D, dom1D])
 '''-------------------------------------------------------'''
 master = assemblyDiagramInit([3,5,2])([[.2,10,.2],[0.2,5,0.2,3,.2],[0.2,4]])
 V,CV = master
@@ -138,5 +147,5 @@ master = eliminaCelle(toRemove,master)
 #raffinatura in cucina
 toRemove = [69,70]
 master = eliminaCelle(toRemove,master)
-VIEW(scheletroModello(master))
-VIEW(visualizzaModello(master))
+#VIEW(scheletroModello(master))
+#VIEW(visualizzaModello(master))
