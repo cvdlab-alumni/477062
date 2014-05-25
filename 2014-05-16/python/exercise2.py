@@ -645,7 +645,28 @@ baseSopraSecondoPiano = T([1,2,3])([0,0,4.2])(baseSopraPrimoPiano)
 baseSopraTerzoPiano = T([1,2,3])([0,0,4])(baseSopraSecondoPiano)
 palo = COLOR(colorePaloScale)(CYLINDER ([.09,18.5])(30))
 scalaAChiocciola = T([1,2,3])([11.5,10.1,.5])(STRUCT([palo,baseSotto,scale,baseSopraPianoTerra,baseSopraPrimoPiano,baseSopraSecondoPiano,baseSopraTerzoPiano]))
-'''-----------------------------------'''
+'''------------apple----------'''
+Sl0 = [[2.05, 2.83], [2.48, 3.02], [2.99, 3.03], [3.29, 2.66]]
+Sl0 = MAP(Bezier(Sl0))(Dom1D)
+Sl1 = [[2.05, 2.83], [1.12, 3.19], [0.87, 2.73], [0.71, 2.5]]
+Sl1 = MAP(Bezier(Sl1))(Dom1D)
+Sl2 = [[1.49, 0.5], [0.57, 0.82], [0.51, 2.11], [0.71, 2.5]]
+Sl2 = MAP(Bezier(Sl2))(Dom1D)
+Sl3 = [[1.49, 0.5], [1.85, 0.52], [2.06, 0.76], [2.4, 0.51]]
+Sl3 = MAP(Bezier(Sl3))(Dom1D)
+Sl4 = [[3.37, 1.36], [3.19, 1.01], [2.98, 0.35], [2.4, 0.51]]
+Sl4 = MAP(Bezier(Sl4))(Dom1D)
+Sl5 = [[3.37, 1.36], [2.79, 1.7], [2.79, 2.27], [3.29, 2.66]]
+Sl5 = MAP(Bezier(Sl5))(Dom1D)
+Sl6 = [[2.62, 3.69], [2.62, 3.14], [2.41, 2.97], [1.99, 2.96]]
+Sl6 = MAP(Bezier(Sl6))(Dom1D)
+Sl7 = [[2.62, 3.69], [2.25, 3.63], [1.92, 3.34], [1.99, 2.96]]
+Sl7 = MAP(Bezier(Sl7))(Dom1D)
+apple = STRUCT([Sl0,Sl1,Sl2,Sl3,Sl4,Sl5,Sl6,Sl7])
+apple = SOLIDIFY(apple)
+apple = T([1,2,3])([8,-40,6.5])(PROD([apple,Q(1.5)]))
+apple = ROTATE([1,2])(PI/2)(apple)
+
 palazzo = COLOR(colorePalazzo)(STRUCT(MKPOLS(palazzo)))
-palazzo = STRUCT([palazzo,nuvole,rampa,rampaGarage,insiemeMacchine,scalaAChiocciola,strada,giardino,giardinoEst,alberi])
+palazzo = STRUCT([palazzo,nuvole,rampa,rampaGarage,insiemeMacchine,scalaAChiocciola,strada,giardino,giardinoEst,alberi,apple])
 VIEW(palazzo)

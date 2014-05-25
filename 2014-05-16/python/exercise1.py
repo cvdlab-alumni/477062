@@ -147,5 +147,7 @@ master = eliminaCelle(toRemove,master)
 #raffinatura in cucina
 toRemove = [69,70]
 master = eliminaCelle(toRemove,master)
-#VIEW(scheletroModello(master))
-#VIEW(visualizzaModello(master))
+
+
+VIEW(scheletroModello(master))
+VIEW(visualizzaModello(master))
