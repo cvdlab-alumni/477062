@@ -1,3 +1,5 @@
+#Homework3
+#Baljinder jit	477062
 from exercise1 import *
 from random import randint
 appartamento1 = master

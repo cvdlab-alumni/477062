@@ -1,5 +1,5 @@
-'''----------------------HW3:esercizio1------------------'''
-'''----------------------importo di librerie----------------------'''
+#Homework3
+#Baljinder jit	477062
 from pyplasm import *
 import os,sys
 sys.path.insert(0, '/Users/baljinderjit/Desktop/GraficaComputazionaleProgetti/lar-cc/lib/py')
