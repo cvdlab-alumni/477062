@@ -254,6 +254,6 @@ sca2 = STRUCT(NN(14)([sca1,T([1,2])([a,b])]));
 sca3 = MAP([S3,S1,S2])(sca2);
 sca4 = T([1,2,3])([0.5,2.3,-0.2])(sca3);
 scala=ROTATE([1,2])(3)(sca4)
-mock_up_3D = STRUCT([piano0,pavimento,T([1,2])([5,15])(scala),copri,nord,sud,est,west])
-mock_up_3D=SKELETON(1)(mock_up_3D)
+mock_up_3D = STRUCT([piano0,pavimento,T([1,2])([5,15])(scala)])
+mock_up_3D = SKELETON(1)(mock_up_3D)
 VIEW(COLOR(colorepavimento)(mock_up_3D))
