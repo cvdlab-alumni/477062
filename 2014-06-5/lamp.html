@@ -44,7 +44,7 @@
         spotLight0.shadowCameraRight = 150;
         spotLight0.shadowCameraTop = 150;
         spotLight0.shadowCameraBottom = -100;
-        spotLight0.intensity = 1;
+        spotLight0.intensity = 2;
         spotLight0.shadowMapHeight = 512;
         spotLight0.shadowMapWidth = 512;
         spotLight0.position.set(0,-120,20);
@@ -53,7 +53,7 @@
         //light2
         var spotLight1 = new THREE.SpotLight( 0xC6C6C6);
         spotLight1.angle = Math.PI;
-        spotLight1.intensity = 1.5;
+        spotLight1.intensity = 2;
         spotLight1.shadowCameraNear = 2;
         spotLight1.shadowCameraFar = 20;
         spotLight1.shadowCameraFov = 70;
@@ -66,7 +66,7 @@
         //light3
         var spotLight2 = new THREE.SpotLight( 0xC6C6C6);
         spotLight2.angle = Math.PI;
-        spotLight2.intensity = 1;
+        spotLight2.intensity = 2;
         spotLight2.shadowCameraNear = 2;
         spotLight2.shadowCameraFar = 20;
         spotLight2.shadowCameraFov = 70;
@@ -79,7 +79,7 @@
         //light4
         var spotLight3 = new THREE.SpotLight( 0xC6C6C6);
         spotLight3.angle = Math.PI;
-        spotLight3.intensity = 1;
+        spotLight3.intensity = 2;
         spotLight3.shadowCameraNear = 2;
         spotLight3.shadowCameraFar = 20;
         spotLight3.shadowCameraFov = 70;
@@ -208,7 +208,7 @@
         //light lamp
         var spotLight4 = new THREE.SpotLight( 0xffffff );
         spotLight4.angle = Math.PI/6;
-        spotLight4.intensity = 10;
+        spotLight4.intensity = 50;
         spotLight4.target = semiSfera;
         spotLight4.position = lampada.position;
         lampada.add(spotLight4);
@@ -312,6 +312,7 @@
             this.switchCamera2 = true;
             this.switchCamera3 = true;
             this.switchLampLight = true;
+            this.switchCameraUp = true;
         };
 
         var gui = new dat.GUI();
@@ -321,6 +322,8 @@
         var cameraController2 = gui.add(controls, 'switchCamera2');
         var cameraController3 = gui.add(controls, 'switchCamera3');
         var cameraController4 = gui.add(controls, 'switchLampLight');
+        var cameraController5 = gui.add(controls, 'switchCameraUp');
+
 
 
         gui.add(controls, 'alpha', 0.0, 2*Math.PI).onChange(function (value) {
@@ -359,6 +362,9 @@
         });
         cameraController4.onChange(function (value) {
             spotLight4.intensity === 0 ? spotLight4.intensity=5 : spotLight4.intensity=0;
+        });
+        cameraController5.onChange(function (value) {
+            spotLight5.visible = value;
         });
 
         var lampEntryScene = new TWEEN.Tween(root.position)
