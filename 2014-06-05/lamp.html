@@ -341,7 +341,7 @@
             this.gamma = 0.0;
             this.delta = 0.0;
             this.epsilon = 0.0;
-            this.switchCamera0 = true;
+            this.switchFrontCamera = true;
             this.switchLampLight = true;
             this.switchCameraUp = true;
             this.posX = 0.0;
@@ -356,7 +356,7 @@
         var posLampGUI = gui.addFolder('posLamp');
         var LightGUI = gui.addFolder('Light');
 
-        var cameraController0 = LightGUI.add(controls, 'switchCamera0');
+        var cameraController0 = LightGUI.add(controls, 'switchFrontCamera');
         var cameraController2 = LightGUI.add(controls, 'switchCameraUp');
         var cameraController3 = LightGUI.add(controls, 'switchLampLight');
 
@@ -404,6 +404,7 @@
         .to({x: -25, y: -25, z: 0}, 5000)
         .easing(TWEEN.Easing.Linear.None)
         .start();
+        
 
         var translateRoot = new TWEEN.Tween(root.position)
         .to({x:-10 , y:0, z: 0}, 8000)
