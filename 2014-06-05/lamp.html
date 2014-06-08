@@ -64,11 +64,11 @@
         spotLight2.castShadow = true;
         spotLight2.angle = Math.PI/6;
         spotLight2.shadowCameraNear = 2;
-        spotLight2.shadowCameraFar = 250;
-        spotLight2.shadowCameraLeft = 200;
-        spotLight2.shadowCameraRight = 300;
-        spotLight2.shadowCameraTop = 300;
-        spotLight2.shadowCameraBottom = 200;
+        spotLight2.shadowCameraFar = 500;
+        spotLight2.shadowCameraLeft = 400;
+        spotLight2.shadowCameraRight = 400;
+        spotLight2.shadowCameraTop = 400;
+        spotLight2.shadowCameraBottom = 400;
         spotLight2.intensity = 3;
         spotLight2.shadowMapHeight = 1024;
         spotLight2.shadowMapWidth = 1024;
@@ -92,20 +92,22 @@
         var MaterialePavimento = new THREE.MeshLambertMaterial({color: 0xC8C8C8,side: THREE.DoubleSide,metal:true});
         var pavimento = new THREE.Mesh(GeometriaPavimento,MaterialePavimento);
         pavimento.position.set(0, 0, -50);
+                pavimento.receiveShadow = true;
+
         scene.add(pavimento);
 
         function getCylinder(r1,r2,h){
             var cylinderGeometry = new THREE.CylinderGeometry(r1, r2, h, 20, 20);
-            var cylinderMaterial = new THREE.MeshPhongMaterial({color: 0x6C5CE4,
-            metal:true,shininess: 100,specular: 0xffffff});
+            var cylinderMaterial = new THREE.MeshPhongMaterial({color: 0x454545,
+            metal:true,shininess: 100,specular: 0xffffff,transparent: true, opacity:.8});
             var cylinder = new THREE.Mesh(cylinderGeometry, cylinderMaterial);
             return cylinder;
         }
 
         function getBox(lung,larg,spessore){
             var GeometriaPiano = new THREE.BoxGeometry(lung,larg,spessore);
-            var MaterialePiano = new THREE.MeshLambertMaterial({color: 0x6E3D08,
-                side: THREE.DoubleSide});
+            var MaterialePiano = new THREE.MeshPhongMaterial({color: 0x6B6969,
+                side: THREE.DoubleSide,transparent: true, opacity: .4});
             var box = new THREE.Mesh(GeometriaPiano,MaterialePiano);
             return box;
         }
@@ -140,12 +142,16 @@
 
         sedia = getBox(25,25,30);
         sedia.position.set(0,-50,-35);
+                sedia.castShadow = true;
 
         poggiaSchiena = getBox(25,4,60);
-        poggiaSchiena.position.set(0,-62.5,-20);
+        poggiaSchiena.position.set(0,-64.51,-20);
+                        poggiaSchiena.castShadow = true;
+
 
         sediaRoot.add(sedia);
         sediaRoot.add(poggiaSchiena);
+
 
         sediaRoot.rotation.z = Math.PI/6;
 
@@ -407,7 +413,7 @@
         
 
         var translateRoot = new TWEEN.Tween(root.position)
-        .to({x:-10 , y:0, z: 0}, 8000)
+        .to({x:-10 , y:0, z: .01}, 8000)
         .easing(TWEEN.Easing.Linear.None)
         .start();
 
@@ -431,8 +437,8 @@
         .easing(TWEEN.Easing.Bounce.Out)
         .start();
 
-        var astaA = new TWEEN.Tween(asta.position)
-        .to({x: -25, y: -48, z: 1}, 1000)
+        var asta = new TWEEN.Tween(asta.position)
+        .to({x: -25, y: -48, z: 1.5}, 1000)
         .easing(TWEEN.Easing.Bounce.Out)
         .start();
 
