@@ -39,7 +39,7 @@
         var trackballControls = new THREE.TrackballControls(camera);       
         var axisHelper = new THREE.AxisHelper(3);
         axisHelper.visible =false;
-        camera.position.set(0,-300,50);
+        camera.position.set(0,-300,200);
         camera.up = new THREE.Vector3(0,0,1);
         camera.lookAt(scene.position);
         //light1
@@ -414,7 +414,7 @@
 
         var translateRoot = new TWEEN.Tween(root.position)
         .to({x:-10 , y:0, z: .01}, 8000)
-        .easing(TWEEN.Easing.Linear.None)
+        .easing(TWEEN.Easing.Bounce.Out)
         .start();
 
         var dropI = new TWEEN.Tween(wordI.rotation)
@@ -429,7 +429,7 @@
 
         var textAnimation = new TWEEN.Tween(pixar.position)
         .to({x: 0, y: .1, z: 0}, 8000)
-        .easing(TWEEN.Easing.Sinusoidal.InOut)
+        .easing(TWEEN.Easing.Bounce.Out)
         .start();
 
         var lampRotation = new TWEEN.Tween(joint2.rotation)
