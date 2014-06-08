@@ -7,6 +7,12 @@
       margin: 0;
       overflow: hidden;
     }
+
+    #stats {  /* Align stats top-left */
+      position: absolute;
+      left: 0px;
+      top: 0px;
+    }
   </style> 
   </head> 
   <body>
@@ -27,11 +33,12 @@
         var scene = new THREE.Scene();
         var camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 0.1, 1000);
         var renderer = new THREE.WebGLRenderer();
-        renderer.setClearColor(new THREE.Color(0xEEEEEE));
+        renderer.setClearColor(new THREE.Color(0xa5bcdd));
         renderer.setSize(window.innerWidth, window.innerHeight);
         renderer.shadowMapEnabled = true;
         var trackballControls = new THREE.TrackballControls(camera);       
         var axisHelper = new THREE.AxisHelper(3);
+        axisHelper.visible =false;
 
         camera.position.set(0,-300,50);
         camera.up = new THREE.Vector3(0,0,1);
@@ -328,7 +335,7 @@
 
         $('body').append(renderer.domElement);
         var controls = new function () {
-            this.showAxisHelper = true;
+            this.showAxisHelper = false;
             this.alpha = 0.0;
             this.beta = 0.0;
             this.gamma = 0.0;
@@ -337,29 +344,44 @@
             this.switchCamera0 = true;
             this.switchLampLight = true;
             this.switchCameraUp = true;
+            this.posX = 0.0;
+            this.posY = 0.0;
         };
 
         var gui = new dat.GUI();
+      
         var axisControl = gui.add(controls, 'showAxisHelper');
-        var cameraController0 = gui.add(controls, 'switchCamera0');
-        var cameraController2 = gui.add(controls, 'switchCameraUp');
-        var cameraController3 = gui.add(controls, 'switchLampLight');
 
-        gui.add(controls, 'alpha', 0.0, 2*Math.PI).onChange(function (value) {
+        var lampGUI = gui.addFolder('lamp');
+        var posLampGUI = gui.addFolder('posLamp');
+        var LightGUI = gui.addFolder('Light');
+
+        var cameraController0 = LightGUI.add(controls, 'switchCamera0');
+        var cameraController2 = LightGUI.add(controls, 'switchCameraUp');
+        var cameraController3 = LightGUI.add(controls, 'switchLampLight');
+
+        lampGUI.add(controls, 'alpha', 0.0, 2*Math.PI).onChange(function (value) {
           joint1.rotation.y = value; 
         });
-        gui.add(controls, 'beta', 0.0, Math.PI/2).onChange(function (value) {
+        lampGUI.add(controls, 'beta', 0.0, Math.PI/2).onChange(function (value) {
           joint1.sphere.rotation.x = value; 
         });
 
-        gui.add(controls, 'gamma', 0.0, Math.PI/2).onChange(function (value) {
+        lampGUI.add(controls, 'gamma', 0.0, Math.PI/2).onChange(function (value) {
           joint2.rotation.x = value; 
         });
-        gui.add(controls, 'delta', 0.0, 2*Math.PI).onChange(function (value) {
+        lampGUI.add(controls, 'delta', 0.0, 2*Math.PI).onChange(function (value) {
           joint2.sphere.rotation.y = value; 
         });
-        gui.add(controls, 'epsilon', 0.0, Math.PI/2).onChange(function (value) {
+        lampGUI.add(controls, 'epsilon', 0.0, Math.PI/2).onChange(function (value) {
           lampO3d.rotation.x = value; 
+        });
+
+        posLampGUI.add(controls, 'posX', -70, 70).onChange(function (value) {
+          root.position.x = value; 
+        });
+        posLampGUI.add(controls, 'posY', -40, 40).onChange(function (value) {
+          root.position.y = value; 
         });
 
         axisControl.onChange(function (value) {
@@ -445,7 +467,7 @@
         stats.update();
         trackballControls.update();
         TWEEN.update();
-        //KF.update();
+        KF.update();
         requestAnimationFrame(render);
         renderer.render(scene, camera);
       }
