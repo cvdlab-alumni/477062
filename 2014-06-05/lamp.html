@@ -39,7 +39,6 @@
         var trackballControls = new THREE.TrackballControls(camera);       
         var axisHelper = new THREE.AxisHelper(3);
         axisHelper.visible =false;
-
         camera.position.set(0,-300,50);
         camera.up = new THREE.Vector3(0,0,1);
         camera.lookAt(scene.position);
@@ -92,7 +91,7 @@
         var MaterialePavimento = new THREE.MeshLambertMaterial({color: 0xC8C8C8,side: THREE.DoubleSide,metal:true});
         var pavimento = new THREE.Mesh(GeometriaPavimento,MaterialePavimento);
         pavimento.position.set(0, 0, -50);
-                pavimento.receiveShadow = true;
+        pavimento.receiveShadow = true;
 
         scene.add(pavimento);
 
@@ -142,16 +141,14 @@
 
         sedia = getBox(25,25,30);
         sedia.position.set(0,-50,-35);
-                sedia.castShadow = true;
+        sedia.castShadow = true;
 
         poggiaSchiena = getBox(25,4,60);
         poggiaSchiena.position.set(0,-64.51,-20);
-                        poggiaSchiena.castShadow = true;
-
+        poggiaSchiena.castShadow = true;
 
         sediaRoot.add(sedia);
         sediaRoot.add(poggiaSchiena);
-
 
         sediaRoot.rotation.z = Math.PI/6;
 
@@ -165,7 +162,6 @@
         asta = getCylinder(2,1,50);
         asta.castShadow = true;
         asta.rotation.z = Math.PI*1.1;
-        //asta.rotation.x = -Math.PI/10;
 
         asta.position.set(-15,-60,4);
         otherObject.add(asta);
@@ -369,6 +365,7 @@
         lampGUI.add(controls, 'alpha', 0.0, 2*Math.PI).onChange(function (value) {
           joint1.rotation.y = value; 
         });
+        
         lampGUI.add(controls, 'beta', 0.0, Math.PI/2).onChange(function (value) {
           joint1.sphere.rotation.x = value; 
         });
@@ -376,9 +373,11 @@
         lampGUI.add(controls, 'gamma', 0.0, Math.PI/2).onChange(function (value) {
           joint2.rotation.x = value; 
         });
+
         lampGUI.add(controls, 'delta', 0.0, 2*Math.PI).onChange(function (value) {
           joint2.sphere.rotation.y = value; 
         });
+
         lampGUI.add(controls, 'epsilon', 0.0, Math.PI/2).onChange(function (value) {
           lampO3d.rotation.x = value; 
         });
@@ -386,6 +385,7 @@
         posLampGUI.add(controls, 'posX', -70, 70).onChange(function (value) {
           root.position.x = value; 
         });
+
         posLampGUI.add(controls, 'posY', -40, 40).onChange(function (value) {
           root.position.y = value; 
         });
