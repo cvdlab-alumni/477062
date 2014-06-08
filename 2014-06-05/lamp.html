@@ -39,7 +39,7 @@
         var trackballControls = new THREE.TrackballControls(camera);       
         var axisHelper = new THREE.AxisHelper(3);
         axisHelper.visible =false;
-        camera.position.set(0,-300,200);
+        camera.position.set(0,-250,150);
         camera.up = new THREE.Vector3(0,0,1);
         camera.lookAt(scene.position);
         //light1
@@ -66,6 +66,7 @@
         spotLight2.shadowCameraFar = 500;
         spotLight2.shadowCameraLeft = 400;
         spotLight2.shadowCameraRight = 400;
+        spotLight2.shadowDarkness = .5;
         spotLight2.shadowCameraTop = 400;
         spotLight2.shadowCameraBottom = 400;
         spotLight2.intensity = 3;
@@ -97,7 +98,7 @@
 
         function getCylinder(r1,r2,h){
             var cylinderGeometry = new THREE.CylinderGeometry(r1, r2, h, 20, 20);
-            var cylinderMaterial = new THREE.MeshPhongMaterial({color: 0x454545,
+            var cylinderMaterial = new THREE.MeshLambertMaterial({color: 0x454545,
             metal:true,shininess: 100,specular: 0xffffff,transparent: true, opacity:.8});
             var cylinder = new THREE.Mesh(cylinderGeometry, cylinderMaterial);
             return cylinder;
@@ -105,7 +106,7 @@
 
         function getBox(lung,larg,spessore){
             var GeometriaPiano = new THREE.BoxGeometry(lung,larg,spessore);
-            var MaterialePiano = new THREE.MeshPhongMaterial({color: 0x6B6969,
+            var MaterialePiano = new THREE.MeshLambertMaterial({color: 0x6B6969,
                 side: THREE.DoubleSide,transparent: true, opacity: .4});
             var box = new THREE.Mesh(GeometriaPiano,MaterialePiano);
             return box;
@@ -140,11 +141,11 @@
         gamba4.position.set(-lung/3,larg/3,-25);
 
         sedia = getBox(25,25,30);
-        sedia.position.set(0,-50,-35);
+        sedia.position.set(0,-50,-34);
         sedia.castShadow = true;
 
         poggiaSchiena = getBox(25,4,60);
-        poggiaSchiena.position.set(0,-64.51,-20);
+        poggiaSchiena.position.set(0,-64.6,-19);
         poggiaSchiena.castShadow = true;
 
         sediaRoot.add(sedia);
