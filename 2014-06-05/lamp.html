@@ -89,11 +89,14 @@
         scene.add(otherObject);
 
         var GeometriaPavimento = new THREE.PlaneGeometry(200,200);
-        var MaterialePavimento = new THREE.MeshLambertMaterial({color: 0xC8C8C8,side: THREE.DoubleSide,metal:true});
-        var pavimento = new THREE.Mesh(GeometriaPavimento,MaterialePavimento);
+        //var MaterialePavimento = new THREE.MeshLambertMaterial({color: 0xC8C8C8,
+            //side: THREE.DoubleSide,metal:true});
+        var image = THREE.ImageUtils.loadTexture("assets/textures/general/floor-wood.jpg");
+        var text = new THREE.MeshLambertMaterial({map: image,side: THREE.DoubleSide});
+
+        var pavimento = new THREE.Mesh(GeometriaPavimento,text);
         pavimento.position.set(0, 0, -50);
         pavimento.receiveShadow = true;
-
         scene.add(pavimento);
 
         function getCylinder(r1,r2,h){
