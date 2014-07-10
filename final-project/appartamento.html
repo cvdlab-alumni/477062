@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html>
+ <head> 
+  <title>Example 33 - Load OBJ model</title> 
+    <link href="script/PointerLock.css" rel="stylesheet" type="text/css">
+  </head>
+  <body >
+  <div id="blocker">
+      <div id="instructions">
+        <span style="font-size:40px">Click to play</span>
+        <br />
+        (W, A, S, D = Move, SPACE = Jump, MOUSE = Look around)
+      </div>
+    </div>
+<div id="wrapper">
+  <img src="assets/objOtherFile/mirino.png" id="mirino" />
+</div>
+  <!-- JavaScript libraries -->
+  <script src="js/jquery.min.js"></script> 
+  <script src="js/three.min.js"></script>
+  <script src="js/Stats.min.js"></script>
+  <script src="js/dat.gui.min.js"></script>
+  <script src="assets/libs/keyframe.js"></script>
+  <script src="assets/libs/tween.min.js"></script>
+  <script type="text/javascript" src="assets/libs/OBJLoader.js"></script> 
+  <script type="text/javascript" src="assets/libs/MTLLoader.js"></script> 
+  <script type="text/javascript" src="assets/libs/OBJMTLLoader.js"></script> 
+  <script src="script/importModel.js"></script>
+  <script src="script/createWallShape.js"></script>
+  <script src="script/makeLight.js"></script>
+  <script src="script/getStandardShape.js"></script>
+  <script src="script/takeFrame.js"></script>
+  <script src="script/makeFoorTexture.js"></script>
+  <script src="script/setmodel.js"></script>
+  <script src="script/makeExternalTexture.js"></script>
+  <script src="script/buildDoor_windows.js"></script>
+  <script src="script/otherAnimation.js"></script>
+  <script src="script/make_Windows_door_Animate.js"></script>
+  <script src="script/getPixarLamp.js"></script>
+  <script src="script/createSceen.js"></script>
+  <script src="assets/libs/PointerLockControls.js"></script>
+  <video id="video" src="assets/movies/nature.mp4" controls></video> 
+  <audio id="audio" src="assets/movies/base.mp3" autoplay loop></audio>
+  <script src="script/makeObjectInHouse.js"></script>
+  <script src="assets/libs/TrackballControls.js"></script>
+  <script>
+    $(function () {
+      var scene = new THREE.Scene();
+      var intersectArrayObject = [];
+      var stats = initStats();
+      var camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 1, 1000);
+      var trackballControls = new THREE.TrackballControls(camera);
+      var webGLRenderer = new THREE.WebGLRenderer();
+      webGLRenderer.setClearColor(new THREE.Color(0xaaaaff, 1.0));
+      webGLRenderer.setSize(window.innerWidth, window.innerHeight);
+      webGLRenderer.shadowMapEnabled = true;
+      webGLRenderer.setSize( window.innerWidth, window.innerHeight );
+      document.body.appendChild( webGLRenderer.domElement );
+      window.addEventListener( 'resize', onWindowResize, false);
+
+      var projector = new THREE.Projector();
+      document.addEventListener('mousedown', onDocumentMouseDown, false);
+
+      //camera.position.set(0, 5,180);
+      var house  = new THREE.Object3D();
+      scene.add(house);
+
+      var debug  = new THREE.Object3D();
+      scene.add(debug);
+
+      var wallTesture  = new THREE.Object3D();
+      house.add(wallTesture);
+
+      var root  = new THREE.Object3D();
+      house.add(root);
+
+      var light  = new THREE.Object3D();
+      house.add(light);
+
+      var model  = new THREE.Object3D();
+      house.add(model);
+
+      var frame  = new THREE.Object3D();
+      house.add(frame);
+
+      var otherObjObject  = new THREE.Object3D();
+      house.add(otherObjObject);
+
+      var windowsDoorAnimate  = new THREE.Object3D();
+      house.add(windowsDoorAnimate);
+
+      var nodeAnimation  = new THREE.Object3D();
+      house.add(nodeAnimation);
+
+      makeLight(light);
+
+      // var axisHelper = new THREE.AxisHelper(1240);
+      // debug.add(axisHelper);
+      //x:1240, y=860, z=420
+
+      house.rotation.x = -Math.PI/2;
+      house.scale.set(0.1,0.1,0.1);
+/*---------------------------pointerLockCamera----------------------------------*/
+      var objects = [];
+      var ray;
+      var controls;
+      var blocker = document.getElementById( 'blocker' );
+      var instructions = document.getElementById( 'instructions' );
+      var havePointerLock = 'pointerLockElement' in document || 'mozPointerLockElement' in document || 'webkitPointerLockElement' in document;
+
+      if ( havePointerLock ) {
+        var element = document.body;
+        var pointerlockchange = function ( event ) {
+        if ( document.pointerLockElement === element || document.mozPointerLockElement === element || document.webkitPointerLockElement === element ) {
+          controls.enabled = true;
+          blocker.style.display = 'none';
+        }else{
+          controls.enabled = false;
+          blocker.style.display = '-webkit-box';
+          blocker.style.display = '-moz-box';
+          blocker.style.display = 'box';
+          instructions.style.display = '';
+          }
+        }
+        var pointerlockerror = function ( event ) {
+          instructions.style.display = '';
+        }
+        // Hook pointer lock state change events
+        document.addEventListener( 'pointerlockchange', pointerlockchange, false );
+        document.addEventListener( 'mozpointerlockchange', pointerlockchange, false );
+        document.addEventListener( 'webkitpointerlockchange', pointerlockchange, false );
+
+        document.addEventListener( 'pointerlockerror', pointerlockerror, false );
+        document.addEventListener( 'mozpointerlockerror', pointerlockerror, false );
+        document.addEventListener( 'webkitpointerlockerror', pointerlockerror, false );
+
+        instructions.addEventListener( 'click', function ( event ) {
+        instructions.style.display = 'none';
+
+        // Ask the browser to lock the pointer
+        element.requestPointerLock = element.requestPointerLock || element.mozRequestPointerLock || element.webkitRequestPointerLock;
+
+        if ( /Firefox/i.test( navigator.userAgent ) ) {
+          var fullscreenchange = function ( event ) {
+            if ( document.fullscreenElement === element || document.mozFullscreenElement === element || document.mozFullScreenElement === element ) {
+                document.removeEventListener( 'fullscreenchange', fullscreenchange );
+                document.removeEventListener( 'mozfullscreenchange', fullscreenchange );
+                element.requestPointerLock();
+              }
+            }
+            document.addEventListener( 'fullscreenchange', fullscreenchange, false );
+            document.addEventListener( 'mozfullscreenchange', fullscreenchange, false );
+            element.requestFullscreen = element.requestFullscreen || element.mozRequestFullscreen || element.mozRequestFullScreen || element.webkitRequestFullscreen;
+            element.requestFullscreen();
+          } else {
+            element.requestPointerLock();
+          }
+        }, false );
+      } else {
+        instructions.innerHTML = 'Your browser doesn\'t seem to support Pointer Lock API';
+      }
+      controls = new THREE.PointerLockControls(camera);
+      controls.getObject().position.set(0, 15,190);
+      scene.add( controls.getObject() );
+      ray = new THREE.Raycaster();
+      ray.ray.direction.set( 0, -1, 0 );
+      /*------------------------------------------------------------*/
+      $('body').append(webGLRenderer.domElement);
+      //import lar model
+      importLarModel(model,"larModel.obj");
+      //setmodel
+      setmodel(model);
+      //texture external wall
+      makeExternalTexture(wallTesture);
+      //frame doors and windows
+      takeFrame(frame);
+      //roof flat
+      takeRoof(1400,1000,10,0x000000,model);
+      //texture land
+      makeFoorTexture(model,"landTexture.bmp","bathroom.bmp");
+      //texture external land
+      makeOutPlane(model,"land.jpg",4000,4000,20);
+      //take windows and door
+      var window_Door = make_Windows_door_Animate();
+
+      doorEntry = window_Door[0];
+      intersectArrayObject.push(doorEntry);
+      windowsDoorAnimate.add(doorEntry.parent);
+
+      doorBath = window_Door[1];
+      intersectArrayObject.push(doorBath);
+      windowsDoorAnimate.add(doorBath.parent);
+
+      doorRoom = window_Door[2];
+      intersectArrayObject.push(doorRoom);
+      windowsDoorAnimate.add(doorRoom.parent);
+
+      var windowsRight  = new THREE.Object3D();
+      windowsDoorAnimate.add(windowsRight);
+      windowRightsideRight = window_Door[3];
+      windowRightsideLeft = window_Door[4];
+      intersectArrayObject.push(windowRightsideRight);
+      intersectArrayObject.push(windowRightsideLeft);
+      windowsRight.add(windowRightsideRight.parent);
+      windowsRight.add(windowRightsideLeft.parent);
+
+      var windowsLeft = new THREE.Object3D();
+      windowsDoorAnimate.add(windowsLeft);
+      windowLeftsideRight = window_Door[5];
+      intersectArrayObject.push(windowLeftsideRight);
+      windowsLeft.add(windowLeftsideRight.parent);
+
+      var window_BathRoom = make_Windows_door_Animate();
+      window_BathRoom = window_Door[6];
+      intersectArrayObject.push(window_BathRoom);
+      windowsDoorAnimate.add(window_BathRoom.parent);
+      
+      outdoor = window_Door[7];
+      intersectArrayObject.push(outdoor);
+      windowsDoorAnimate.add(outdoor.parent);
+
+      makeObjectInBathRoom(otherObjObject);
+      makeObjectInRoom(otherObjObject);
+      makeObjectInKitchen(otherObjObject);
+      var car = makeObjectOutHouse(otherObjObject);
+      intersectArrayObject.push(car);
+      makeObjectInLivingRoom(otherObjObject);
+      /*-------------------------------Pixarlamp----------------------------------*/
+      //base
+      r1 = 4;
+      r2 = r1;
+      h = .5; 
+      base = getCylinder(r1,r2,h,20,0x454545);
+      base.position.set(0, h/2, 0);
+      base.castShadow=true;
+      root.add(base);
+      //arm
+      var height = 6;
+      var radius = 1;
+      var joint1 = mkJoint(radius, height);
+      joint1.position.y = h/2+radius;
+      
+      intersectArrayObject.push(joint1);
+      base.add(joint1);
+      var joint2 = mkJoint(radius, height);
+      joint1.hook.add(joint2);
+      //last sphere
+      var lampO3d = new THREE.Object3D();
+      lastsphere = getSphereLamp(radius);
+      joint2.hook.add(lampO3d);
+      lampO3d.add(lastsphere);
+      //lampSphere
+      lamR = radius*3;
+      var sphereGeometry = new THREE.SphereGeometry(lamR, 20, 20, 0,
+      -2*Math.PI, Math.PI,Math.PI/2);
+      var sphereMaterial = new THREE.MeshPhongMaterial({color: 0x6C5CE4,
+        side: THREE.DoubleSide, metal:true,shininess: 100,specular: 0xffffff});
+      var halfSphere = new THREE.Mesh(sphereGeometry, sphereMaterial);
+      halfSphere.position.set(0, lamR+radius, 0);
+      halfSphere.castShadow = true;
+      lastsphere.add(halfSphere);
+      //lamp
+      lamR = radius;
+      var bulb = getSphereLamp(lamR);
+      bulb.position.set(0, -2*lamR, 0);
+      halfSphere.add(bulb);
+
+      //light lamp
+      var lampLight = new THREE.SpotLight( 0xffffff );
+      lampLight.angle = Math.PI/6;
+      lampLight.intensity = 4;
+      lampLight.target = halfSphere;
+      lampLight.position = bulb.position;
+      bulb.add(lampLight);
+
+      root.position.set(300,260,95);
+      root.rotation.x = Math.PI/2; 
+      /*------------------------------------------------------------*/
+      //take a tv in living room
+      var $video = $('#video');
+      var video = $video[0];
+      var $audio = $('#audio');
+      var audio = $audio[0];
+      var texture = new THREE.Texture(video);
+      texture.minFilter = THREE.LinearFilter;
+      texture.magFilter = THREE.LinearFilter;
+      texture.format = THREE.RGBFormat;
+      texture.generateMipmaps = false;
+      var tvLivingRoom = createSceen(new THREE.BoxGeometry(250, 150, 0.5),texture);
+      tvLivingRoom.position.set(600,250,200);
+      intersectArrayObject.push(tvLivingRoom);
+      tvLivingRoom.rotation.x = Math.PI/2;
+      tvLivingRoom.rotation.y = -Math.PI/2;
+      video.pause();
+      tvLivingRoom.interact = function () {
+        if (video.paused){
+          video.play();
+          video.muted = false;
+          audio.pause();
+          video.volume = .5;
+          } 
+        else{ 
+          video.pause();
+          audio.play();
+          audio.muted = false;
+        }
+      }
+      otherObjObject.add(tvLivingRoom);
+
+
+      var elementBall = moreAnimation(nodeAnimation);
+      intersectArrayObject.push(elementBall[0]);
+      intersectArrayObject.push(elementBall[1]);
+
+      var controlObject = new function () {
+            this.audio = true;
+            this.video = true;
+            this.volume = .5;
+            this.alpha = 0.0;
+            this.beta = 0.0;
+            this.gamma = 0.0;
+            this.delta = 0.0;
+            this.epsilon = 0.0;
+            this.switchLampLight = true;
+      };
+
+      var gui = new dat.GUI();
+      var audioGUI = gui.addFolder('sound');
+      var lampGUI = gui.addFolder('lamp');
+      var LightGUI = gui.addFolder('Light');
+
+      var controllerAudio = audioGUI.add(controlObject, 'audio');
+      var controllerVideo = audioGUI.add(controlObject, 'video');
+      var cameraController3 = LightGUI.add(controlObject, 'switchLampLight');
+
+      controllerAudio.onChange(function (value) {
+        audio.muted == true ? audio.muted = false : audio.muted = true;
+      });
+      controllerVideo.onChange(function (value) {
+        video.muted == true ? video.muted = false : video.muted = true;
+      });
+      audioGUI.add(controlObject, 'volume', 0, 1).onChange(function (value) {
+        video.volume = value;
+        audio.volume = value;
+      });
+      lampGUI.add(controlObject, 'alpha', 0.0, 2*Math.PI).onChange(function (value) {
+        joint1.rotation.y = value; 
+      });
+        
+      lampGUI.add(controlObject, 'beta', 0.0, Math.PI/2).onChange(function (value) {
+        joint1.sphere.rotation.x = value; 
+      });
+
+      lampGUI.add(controlObject, 'gamma', 0.0, Math.PI/2).onChange(function (value) {
+        joint2.rotation.x = value; 
+      });
+
+      lampGUI.add(controlObject, 'delta', 0.0, 2*Math.PI).onChange(function (value) {
+        joint2.sphere.rotation.y = value; 
+      });
+
+      lampGUI.add(controlObject, 'epsilon', 0.0, Math.PI/2).onChange(function (value) {
+        lampO3d.rotation.x = value; 
+      });
+
+      cameraController3.onChange(function (value) {
+        lampLight.intensity === 0 ? lampLight.intensity = 4 : lampLight.intensity = 0;
+      });
+       
+
+    function onDocumentMouseDown (event) {
+      event.preventDefault();
+      if(document.pointerLockElement === element || document.mozPointerLockElement === element || document.webkitPointerLockElement === element){
+        var vector = new THREE.Vector3(0,0,2); 
+        projector.unprojectVector(vector,camera);
+        var raycaster = new THREE.Raycaster(vector,controls.getDirection(new THREE.Vector3(0,0,0)).clone());
+      }else{
+        var vector = new THREE.Vector3(( event.clientX / window.innerWidth ) 
+          * 2 - 1, -( event.clientY /window.innerHeight ) * 2 + 1, 0.5);
+        projector.unprojectVector(vector, camera);
+        var raycaster = new THREE.Raycaster(camera.position, vector.sub(camera.position).normalize());
+      }
+      var intersects = raycaster.intersectObjects(intersectArrayObject);
+      if (intersects.length > 0){
+          intersects[0].object.interact();
+      }
+    }
+
+    render();  
+     function render() {
+        stats.update();
+        TWEEN.update();
+        KF.update();
+        trackballControls.update();
+        if (video.readyState === video.HAVE_ENOUGH_DATA) {
+          if (texture) texture.needsUpdate = true;
+        }          
+        requestAnimationFrame(render);
+        webGLRenderer.render(scene, camera);
+        controls.isOnObject(false);
+        ray.ray.origin.copy( controls.getObject().position );
+        ray.ray.origin.y -= 10;
+        var intersections = ray.intersectObjects(objects);
+        if ( intersections.length > 0 ) {
+          var distance = intersections[ 0 ].distance;
+          if ( distance > 0 && distance < 10 ) {
+            controls.isOnObject( true );
+          }
+        }
+          controls.update();
+      }
+    function initStats() {
+      var stats = new Stats();
+      stats.setMode(0);
+      $('body').append(stats.domElement);
+      return stats;
+      }
+    });
+  </script>  
+ </body>
+</html>
